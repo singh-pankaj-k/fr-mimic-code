@@ -1,0 +1,73 @@
+#Rund a postgres database with following values
+#   database: on_spark_auth_db
+#   username: on_spark_auth_user
+#   password: password
+#version: "3.9"
+services:
+  mimic-iv-db:
+    image: postgres:latest
+    container_name: mimic-iv-db
+    restart: always
+    environment:
+      POSTGRES_DB: mimic_iv_db
+      POSTGRES_USER: mimic_iv_user
+      POSTGRES_PASSWORD: password
+    ports:
+      - target: 5432
+        published: 10432
+    volumes:
+      - mimic-iv-volume:/var/lib/postgresql/data
+
+  mimic-iv-cxr-db:
+    image: postgres:latest
+    container_name: mimic-iv-cxr-db
+    restart: always
+    environment:
+      POSTGRES_DB: mimic_iv_cxr_db
+      POSTGRES_USER: mimic_iv_cxr_user
+      POSTGRES_PASSWORD: password
+    ports:
+      - target: 5432
+        published: 10433
+    volumes:
+      - mimic-iv-cxr-volume:/var/lib/postgresql/data
+
+  mimic-iv-ed-db:
+    image: postgres:latest
+    container_name: mimic-iv-ed-db
+    restart: always
+    environment:
+      POSTGRES_DB: mimic_iv_ed
+      POSTGRES_USER: mimic_iv_ed_user
+      POSTGRES_PASSWORD: password
+    ports:
+      - target: 5432
+        published: 10434
+    volumes:
+      - mimic-iv-ed-volume:/var/lib/postgresql/data
+
+  mimic-iv-note-db:
+    image: postgres:latest
+    container_name: mimic-iv-note-db
+    restart: always
+    environment:
+      POSTGRES_DB: mimic_iv_note_db
+      POSTGRES_USER: mimic_iv_note_user
+      POSTGRES_PASSWORD: password
+    ports:
+      - target: 5432
+        published: 10435
+    volumes:
+      - mimic-iv-note-volume:/var/lib/postgresql/data
+
+volumes:
+  mimic-iv-volume:
+    external: true
+  mimic-iv-cxr-volume:
+    external: true
+  mimic-iv-ed-volume:
+    external: true
+  mimic-iv-note-volume:
+    external: true
+
+
